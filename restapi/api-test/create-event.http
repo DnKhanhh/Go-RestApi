@@ -1,9 +1,10 @@
 POST http://localhost:8082/events
 content-type: application/json
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRuazJAZ21haWwuY29tIiwiZXhwIjoxNzExNTM0NzY0LCJ1c2VySWQiOjB9.-23w4vg3Svuggl8YR3Jn_8aHplRN_ibghSzkdveYIA4
 
 {
-    "name": "Test 12312",
-    "description": "A test db",
-    "location": "Test db",
-    "dateTime": "2025-01-01T15:30:00.000Z"
+    "name": "Test Authorization",
+    "description": "Updated",
+    "location": "Updated",
+    "dateTime": "2024-03-01T15:30:00.000Z"
 }
