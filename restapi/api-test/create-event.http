@@ -1,10 +1,10 @@
 POST http://localhost:8082/events
 content-type: application/json
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRuazJAZ21haWwuY29tIiwiZXhwIjoxNzExNTM0NzY0LCJ1c2VySWQiOjB9.-23w4vg3Svuggl8YR3Jn_8aHplRN_ibghSzkdveYIA4
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRuazNAZ21haWwuY29tIiwiZXhwIjoxNzExNTY1NDc5LCJ1c2VySWQiOjN9.QpGWsN8etf6hG59a7y-GX57JgVF4JVbmhn1IAm8uOTM
 
 {
-    "name": "Test Authorization",
-    "description": "Updated",
-    "location": "Updated",
+    "name": "Test Authorization 1",
+    "description": "Updated 1",
+    "location": "Updated 1",
     "dateTime": "2024-03-01T15:30:00.000Z"
 }

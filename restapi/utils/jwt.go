@@ -46,11 +46,7 @@ func VerifyToken(token string) (int64, error) {
 		return 0, errors.New("Invalid token claims.")
 	}
 
-	userId, ok := claims["userId"].(int64)
-
-	if !ok {
-		panic("Error")
-	}
+	userId := int64(claims["userId"].(float64))
 
 	return userId, nil
 }

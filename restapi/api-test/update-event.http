@@ -1,5 +1,6 @@
-PUT http://localhost:8082/events/3
+PUT http://localhost:8082/events/1
 content-type: application/json
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRuazJAZ21haWwuY29tIiwiZXhwIjoxNzExNTY0MjIzLCJ1c2VySWQiOjJ9.GlGAGbfVmu_yHx9GRQIVTqgFmglv1DxUcIQh2n342r8
 
 {
     "name": "Create test event name",

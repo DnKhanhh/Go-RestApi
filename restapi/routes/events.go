@@ -5,7 +5,6 @@ import (
 	"strconv"
 
 	"example.com/restapi/models"
-	"example.com/restapi/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,27 +18,15 @@ func getEvents(ctx *gin.Context) {
 }
 
 func createEvent(ctx *gin.Context) {
-	token := ctx.Request.Header.Get("Authorization")
-
-	if token == "" {
-		ctx.JSON(http.StatusUnauthorized, gin.H{"message": "No authorized."})
-		return
-	}
-
-	userId, err := utils.VerifyToken(token)
-	if err != nil {
-		ctx.JSON(http.StatusUnauthorized, gin.H{"message": "No authorized."})
-		return
-	}
-
 	var event models.Event
-	err = ctx.ShouldBindJSON(&event)
+	err := ctx.ShouldBindJSON(&event)
 
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse request data."})
 		return
 	}
 
+	userId := ctx.GetInt64("userId")
 	event.UserID = userId
 
 	err = event.Save()
@@ -72,10 +59,16 @@ func updateEvent(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Could not parse event id. Try again later."})
 		return
 	}
+	userId := ctx.GetInt64("userId")
+	event, err := models.GetEventById(eventId)
 
-	_, err = models.GetEventById(eventId)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Could not parse event."})
+		return
+	}
+
+	if event.UserID != userId {
+		ctx.JSON(http.StatusUnauthorized, gin.H{"message": "Not authorized to update event"})
 		return
 	}
 
@@ -105,12 +98,18 @@ func deleteEvent(ctx *gin.Context) {
 		return
 	}
 
+	userId := ctx.GetInt64("userId")
 	event, err := models.GetEventById(eventId)
+
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Could not parse event."})
 		return
 	}
 
+	if event.UserID != userId {
+		ctx.JSON(http.StatusUnauthorized, gin.H{"message": "Not authorized to delete event"})
+		return
+	}
 	err = event.Delete()
 
 	if err != nil {
